@@ -61,10 +61,11 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
         "resizable": true,
         "title": "vrc-get-gui",
-        "width": 800
+        "width": 1280,
+        "height": 760,
+        "theme": "Light"
       }
     ]
   }
