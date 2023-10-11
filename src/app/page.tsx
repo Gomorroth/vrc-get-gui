@@ -1,22 +1,21 @@
 "use client"
 
-import Image from 'next/image'
-import { PageIDContext } from './contexts'
-import { useState } from 'react'
-import SideBar from './sidebar'
-import * as PageDefinition from "./pageDefinition"
+import SideBar from './components/sidebar'
+import * as PageDefinition from "../lib/pageDefinition"
+import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
-  const PageIDState = useState(0)
-  const [pageID, setPageID] = PageIDState;
+  const searchParams = useSearchParams();
+
+  const page = PageDefinition.Pages.find(x => x.name === searchParams.get("page")) ?? PageDefinition.Projects;
 
   return (
-    <PageIDContext.Provider value={PageIDState}>
-      <div className='flex flex-row'>
-          <SideBar/>
-          {PageDefinition.Pages[pageID].content}
-      </div>
-    </PageIDContext.Provider>
+    <div className='flex flex-row'>
+        <SideBar/>
+        <div className='w-full h-screen'>
+          {page.content}
+        </div>
+    </div>
   )
 }

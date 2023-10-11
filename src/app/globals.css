@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 38, 42, 61;
-  --background-start-rgb: 214, 219, 220;
+  --background-rgb: 239, 239, 239;
   --background-end-rgb: 255, 255, 255;
 }
 
@@ -18,11 +18,5 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      /*rgb(var(--background-end-rgb))*/
-      transparent
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
 }
