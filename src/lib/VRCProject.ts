@@ -1,21 +1,33 @@
+"use client"
+
+import { Store } from "tauri-plugin-store-api";
+import { invoke } from "@tauri-apps/api/tauri";
+
 export type VRCProject = 
 {
     displayName : string,
-    projectType : VRCProjectType,
     projectPath : string,
+    projectType : number,
     updateAt? : Date
 };
 
 export enum VRCProjectType
 {
-    Unknown,
-    Avatar,
-    World
+    Unknown = 0,
+    Avatar = 1,
+    World = 2
 };
 
-export async function GetProjectInfos() : Promise<VRCProject[]>
+export const ProjectData = new Store("project.dat");
+
+export async function RegisterProject(projectPath: string) 
 {
-    return TestProjects;
+    await invoke('register_project', { projectPath: projectPath});    
+}
+
+export async function GetRegisteredProjects() : Promise<VRCProject[]>
+{
+    return await invoke('get_registered_projects');
 };
 
 export function GetProjectInfo(projectPath : string | null) : VRCProject | null

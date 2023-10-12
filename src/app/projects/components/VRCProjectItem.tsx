@@ -3,6 +3,7 @@
 import { VRCProject, VRCProjectType } from "@/lib/VRCProject";
 import { MouseEventHandler, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { open } from '@tauri-apps/api/dialog';
 
 import AvatarIcon from "@/icons/account_circle.svg"
 import WorldIcon from "@/icons/language.svg"
@@ -12,6 +13,8 @@ import UnknownIcon from "@/icons/help.svg"
 import IconButton from "../../components/IconButton"
 
 import "./VRCProjectItem.css"
+import BorderButton from "@/app/components/borderButton";
+import { ShowFolderInExploler } from "@/lib/Exploler";
 
 type Props = {
     project: VRCProject,
@@ -34,25 +37,22 @@ export default function VRCProjectItem(props: Props)
             <div className="inline-flex items-center shrink grow min-w-0">
                 {icons[project.projectType]}
                 <span className="w-full ml-2 flex flex-col truncate">
-                    <p className="truncate w-full  text-3xl font-extrabold">{project.displayName}</p>
+                    <p className="truncate w-full text-2xl font-extrabold">{project.displayName}</p>
                     <span className="flex items-center">
                         <p 
-                        className="truncate text-xs font-bold"
-                        data-tooltip-id="vrcprojectitem"
-                        data-tooltip-content={project.projectPath}
-                        data-tooltip-place="bottom">
+                            className="truncate text-xs font-bold"
+                            data-tooltip-id="tooltip"
+                            data-tooltip-content={project.projectPath}
+                            data-tooltip-place="bottom">
                             {project.projectPath}
                         </p>
-                        <IconButton icon={<OpenFolderIcon width={16}/>} className="ml-2"/>
+                        <IconButton icon={<OpenFolderIcon width={16}/>} className="ml-2" onClick={() => ShowFolderInExploler(project.projectPath)}/>
                     </span>
                 </span>
             </div>
-            <div className="ml-auto mr-8 shrink-0 self-center min-w-[130px] text-base">
-                <DateComponent date={project.updateAt}/>
-            </div>
             <div className="ml-auto shrink-0 self-center">
-                <button className=" border rounded-3xl py-1 px-8 text-center font-extrabold border-primary text-white bg-primary " onClick={() => router.push(`/manage?path=${project.projectPath}`)}>パッケージを管理</button>
-                <button className=" border rounded-3xl py-1 px-7 text-center font-extrabold border-black ml-2">バックアップを作成</button>
+                <BorderButton className="border-primary text-white bg-primary" onClick={() => router.push(`/manage?path=${project.projectPath}`)}>パッケージを管理</BorderButton>
+                <BorderButton className="border-black px-7 ml-2">バックアップを作成</BorderButton>
             </div>
             <div className="ml-2 shrink-0 self-center">
                 <button><MenuIcon width={32} height={32}/></button>
