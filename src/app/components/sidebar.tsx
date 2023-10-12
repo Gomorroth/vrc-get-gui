@@ -2,7 +2,7 @@
 
 import RoundedBox from "./roundedBox";
 import IconButton from "./IconButton";
-import * as PageDefinition from "../../lib/pageDefinition"
+import * as PageDefinition from "@/lib/PageDefinition"
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 export default function SideBar()

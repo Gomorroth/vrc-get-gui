@@ -13,7 +13,7 @@ export enum VRCProjectType
     World
 };
 
-export function GetProjectInfos() : VRCProject[]
+export async function GetProjectInfos() : Promise<VRCProject[]>
 {
     return TestProjects;
 };
@@ -25,13 +25,13 @@ export function GetProjectInfo(projectPath : string | null) : VRCProject | null
     return TestProjects.find(x => x.projectPath == projectPath) ?? null;
 }
 
-const TestProjects : VRCProject[] = 
+export const TestProjects : VRCProject[] = 
 [
     {
         displayName : "Avatar",
         projectPath : "D:\\UnityProjects\\Avatar",
         projectType : VRCProjectType.Avatar,
-        updateAt: new Date("2023/10/11"),
+        updateAt: new Date("2023/10/12"),
     },
     
     {
@@ -45,21 +45,21 @@ const TestProjects : VRCProject[] =
         displayName : "Unknown",
         projectPath : "D:\\UnityProjects\\aaaaaaaaaaaaaaaa\\Unknown",
         projectType : VRCProjectType.Unknown,
-        updateAt: new Date("2023/10/11"),
+        updateAt: new Date("2023/10/10"),
     },
     
     {
         displayName : "プロジェクト",
         projectPath : "D:\\UnityProjects\\aaaaaaaaaaaaaaaa\\Unknow2n",
         projectType : VRCProjectType.Unknown,
-        updateAt: new Date("2023/10/11"),
+        updateAt: new Date("2023/10/01"),
     },
     
     {
         displayName : "Unknown2",
         projectPath : "D:\\UnityProjects\\aaaaaaaaaaaaaaaa\\Unknown",
         projectType : VRCProjectType.Unknown,
-        updateAt: new Date("2023/10/11"),
+        updateAt: new Date("2023/10/12 12:21"),
     },
     
     {

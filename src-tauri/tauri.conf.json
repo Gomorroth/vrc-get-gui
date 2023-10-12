@@ -62,7 +62,7 @@
       {
         "url": "/projects",
         "fullscreen": false,
-        "resizable": true,
+        "resizable": false,
         "title": "vrc-get-gui",
         "width": 1280,
         "height": 760,

@@ -2,22 +2,42 @@
 
 import { GetProjectInfos, VRCProject, VRCProjectType } from "@/lib/VRCProject"
 import Content from "../components/content"
-import VRCProjectItem from "../components/VRCProjectItem"
+import VRCProjectItem from "./components/VRCProjectItem"
 import { Tooltip } from 'react-tooltip'
+import { Suspense } from "react"
+import LoadingSpinner from "../components/loadingSpinner"
 
-
-export default function Projects() 
+export default function Page() 
 {
     return (
-        <Content title="プロジェクト">
-            <div className="pt-5 pb-5 pr-5 h-full overflow-y-auto">
-                <ul className="p-2 h-full bg-white rounded-xl overflow-auto">
-                    {GetProjectInfos().map((x, i) => <VRCProjectItem key={i} project={x}/>)}
-                </ul>
-            </div>
-
+        <Content header={<Header/>}>
+            <Suspense fallback={<Loading/>}>
+                <Projects/>
+            </Suspense>
             <Tooltip id="vrcprojectitem"/>
         </Content>
     )
-  }
-  
+}
+function Header()
+{
+    return (
+        <>
+            <p className="ml-10 mb-5">プロジェクト</p>
+        </>
+    )
+}
+
+async function Projects()
+{
+    const projects = await GetProjectInfos();
+    return projects.map((x, i) => <VRCProjectItem key={i} project={x}/>);
+}
+
+function Loading()
+{
+    return (
+        <div className="flex h-full justify-center items-center">
+            <LoadingSpinner/>
+        </div>
+    )
+}

@@ -7,9 +7,17 @@ import { Tooltip } from 'react-tooltip'
 export default function Page() 
 {
     return (
-        <Content title="設定">
-            <Link href={"/manage"}>あｄｄ</Link>
+        <Content header={<Header/>}>
+            
         </Content>
     )
-  }
+}
   
+function Header()
+{
+    return (
+        <>
+            <p className="ml-10 mb-5">設定</p>
+        </>
+    )
+}
